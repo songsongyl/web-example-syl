@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css" class="cs">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.css" rel="stylesheet">
+    <style>
+        /* 全局设置 */
+* {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* 容器 */
+.container{
+    height: 100vh;
+    position: relative;
+}
+/* 头部导航栏 */
+.container-top{
+    position: fixed;
+    height: 4rem;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f7f5f6;
+}
+.container-top span{
+    width: auto;
+    line-height: 2rem;
+    margin: 0 2rem;
+}
+.container-top .open_list{
+    font-size: 1.5rem;
+    color: #000;
+}
+.container-top .navbar-menu{
+    width: 80%;
+}
+.container-top .navbar-menu ul{
+    width: 100%;
+    line-height: 4rem;
+}
+.container-top .navbar-menu ul li{
+    display: inline-block;
+    min-width: 4rem;
+    height: 100%;
+    text-align: center;
+}
+.container-top .navbar-menu ul li>a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1.25rem;
+    letter-spacing: 1rem;
+    margin-left: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container-top button{
+    min-width: 5rem;
+    height: 2.5rem;
+    margin-left: 2rem;
+    border-radius: 0.3125rem;
+    background-color: orange;
+    outline: none;
+    border: none;
+    font-size: 1.05rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container-top .sign-up-in{
+    line-height: 4rem;
+    min-width: 16rem;
+    display: inline-block;
+ 
+}
+.container-top span:hover{
+    color: skyblue;
+}
+.container-top ul>li:hover{
+    background-color: deepskyblue;
+}
+ 
+/* 左边导航栏 */
+.container-left{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: .8s;
+    z-index: 1;
+    overflow-x: hidden;
+    background-color: rgba(64, 64, 64, 0.7);
+}
+.container-left span{
+    float: right;
+    margin: 0 5px;
+}
+.container-left .close-left{
+    font-size: 1.15rem;
+    color: #fff;
+}
+.container-left .list{
+    margin: 60px 0;
+    color: #fff;
+    overflow: hidden;
+    text-align: center;
+    width: 17.5rem;
+}
+.container-left .item{
+    font: 600 17px '';
+    padding: 16px 52px;
+    font-size: 1.25rem;
+    letter-spacing: 5px;
+    transition: .8s;
+}
+.container-left .item h2{
+    font-size: 1.25rem;
+    color: #3b3b3b;
+}
+.container-left .item::after{
+    content: '';
+    position: absolute;
+    left: 15px;
+    margin-top: -22px;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.container-left .item ul{
+    width: 0;
+    height: 100%;
+    padding: 60px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    background-color:#f7f5f6;
+    transition: .8s;
+}
+.container-left .item ul li{
+    padding: 16px 24px;
+    transition: .3s;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 4rem;
+    width: 14rem;
+}
+.container-left .item ul li h2{
+    font-size: 1.25rem;
+    width: 5rem;
+    line-height: 2rem;
+    overflow: hidden;
+}
+.container-left .list>li:hover{
+    background-color: orange;
+}
+.container-left .item:hover ul{
+    width: 14.25rem;
+}
+.container-left .item ul li:hover{
+    background-color: orange;
+    color: #000;
+}
+.container-left .item ul li::before{
+    content: '';
+    background-image: url('mi.jpg');
+    width: 58px;
+    height: 58px;
+    background-size: cover;
+    margin-right: 1rem;
+}
+.container-left .close-left:hover{
+    color: #3b3b3b;
+}
+/* 主体 */
+.content{
+    position: absolute;
+    height: 90%;
+    width: 100vw;
+    background-color: #fff;
+    margin-top: 68px;
+    text-align: center;
+    z-index: -1;
+}
+    </style>
+    <body>
+    <div class="container">
+    <!-- 顶边导航栏 -->
+    <nav class="container-top">
+        <span id="open-left" class="open_list"><i class="fas fa-list"></i></span>
+        <div class="navbar-menu">
+            <ul>
+                <li><a href="#">家园</a></li>
+                <li><a href="#">产品</a></li>
+                <li><a href="#">服务</a></li>
+                <li><a href="#">支持</a></li>
+            </ul>
+        </div>
+        <div class="sign-up-in">
+            <button>登&nbsp;&nbsp;录</button>
+            <button>注&nbsp;&nbsp;册</button>
+        </div>
+    </nav>
+    <!-- 左边导航栏 -->
+    <nav class="container-left">
+        <span class="close-left" id="btn-close"><i class="fas fa-thin fa-xmark"></i></span>
+        <ul class="list">
+            <li class="item">
+                小米系列
+                <ul name="phone">
+                    <li><h2>小米6</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                </ul>
+            </li>
+ 
+            <li class="item">
+                红米系列
+                <ul name="phone">
+                    <li><h2>红米8</h2></li>
+                    <li><h2>红米12</h2></li>
+                    <li><h2>红米14</h2></li>
+                    <li><h2>红米16</h2></li>
+                </ul>
+            </li>
+ 
+            <li class="item">
+                华为系列
+                <ul name="phone">
+                    <li><h2>小米6</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                </ul>
+            </li>
+ 
+            <li class="item">
+                OPPO系列
+                <ul name="phone">
+                    <li><h2>小米6</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                    <li><h2>小米7</h2></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- 主体 -->
+    <div class="content">
+        <p>内容....</p>
+    </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

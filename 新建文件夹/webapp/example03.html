@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顶部导航栏</title>
+    <style>
+        *{
+           margin:0;
+           padding:0;
+       }
+       li {
+           list-style: none;
+       }
+       a {
+           text-decoration: none;
+       }
+       #header {
+           background-color:rgb(92, 92, 224);
+           width: 100%;
+           height: 50px;
+       }
+       #header .menu {
+           display: flex;
+           height: 100%;
+           line-height: 50px;
+           max-width: 600px;
+           padding: 0 20px;
+       }
+       #header .menu li{
+           height: 100%;
+       }
+       #header li:hover{
+           background: rgb(160, 126, 95);
+           transition: 0.5s;
+       }
+       #header .menu li a{
+           font: bolder normal 16px Source Sans Pro;
+           color: #d33232;
+           padding: 14px 15px;
+       }
+       #header .menu .classroom-building{
+           display: none;
+           position: absolute;
+           background-color: #008080;
+           border-radius: 5px;
+       }
+       #header .menu .classroom-building li{
+           padding: 0 0.5em;
+           text-align: center;
+       }
+       #header .menu .building:hover .classroom-building{
+           display: block;
+       }
+       #header .menu .course-list{
+          display: none;
+          position: absolute;
+          background-color: #008080;
+          border-radius: 5px;
+       }
+       #header .menu .course-list li{
+           padding: 0 0.5em;
+           text-align: center;
+       }
+       #header .menu .course:hover .course-list{
+           display: block;
+       }
+       #header .menu .test-list{
+          display: none;
+          position: absolute;
+          background-color: #008080;
+          border-radius: 5px;
+       }
+       #header .menu .test-list li{
+           padding: 0 0.5em;
+           text-align: center;
+       }
+       #header .menu .test:hover .test-list{
+           display: block;
+       }
+       </style>
+</head>
+<body>
+    <h1>东北林业大学简介</h1>
+    <div id="header">
+        <ul>
+            <div class="menu">
+                <li class="building"><a href="#"> 教学楼</a>
+                   <ul class="classroom-building">
+                       <li><a href="#" >丹青楼</a></li>
+                       <li><a href="#" >锦绣楼</a></li>
+                       <li><a href="#" >主楼</a></li>
+                    </ul>
+                </li>
+                <li class="course"><a href="#">课程</a>
+                   <ul class="course-list">
+                      <li><a href="#">选修课</a></li>
+                      <li><a href="#">必修课</a></li>
+                      <li><a href="#">通识课</a></li>
+                   </ul>
+                </li>
+                <li class="activity"><a href="#">活动</a></li>
+                <li class="test"><a href="#">考试</a>
+                   <ul class="test-list">
+                       <li><a href="#">阶段考</a></li>
+                       <li><a href="#">期末考</a></li>
+                   </ul>
+                </li>
+            </div>
+        </ul>
+    </div>
+</body>
+</html>
