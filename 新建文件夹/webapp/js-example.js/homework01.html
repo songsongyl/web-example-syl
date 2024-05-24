@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当改变课程名称下拉框值时，从对象数组中找到对应的授课教师姓名，渲染到页面。
+        下拉框项的值为 id 值</title>
+</head>
+<body>
+    <div>
+        <p>请选择课程</p>
+        <select name="" id="course">
+            <option></option>
+            <option value="1">java</option>
+            <option value="2">web</option>
+            <option value="3">python</option>
+        </select>
+        <p id="teacher">老师是:</p>
+    </div>
+    <script>
+        
+        const courses = [{id:1,coursename:"java",teachername:"wb"},{id:2,coursename:"web",teachername:"bo"},{id:3,coursename:"python",teachername:"li"}]
+        const cou = document.getElementById("course")
+        const tea =document.getElementById("teacher")
+        cou.addEventListener("change",function(){
+           const result = courses.find((course) => course.id == cou.value) 
+           if(result) {
+            tea.innerHTML=`你的老师是: ${result.teachername}`
+           }
+           else{
+            tea.innerHTML = "无"
+           }
+        })
+    </script>
+</body>
+</html>

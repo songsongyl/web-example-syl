@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当 2s 后输入框没有输入时，将输入字母转为大写。(up/down 事件；定时器；定时器取消；封装)</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    div {
+        width: 100%;
+        height: 300px;
+        text-align: center;
+        font-size: 3em;
+    }
+    input {
+        width: 400px;
+        height: 20%;
+    }
+    </style>
+</head>
+<body>
+    <div>
+    <p>当 2s 后输入框没有输入时，将输入字母转为大写</p>
+    <input type="text" id="search">
+    </div>
+    <script>
+     const a = document.getElementById("search")
+     function toUpper(){
+       a.value = a.value.toUpperCase()
+     }
+     let n = 0
+     a.addEventListener("keyup",function() {
+        // clearTimeout(n)
+        n = setTimeout(toUpper,2000)
+     })
+     a.addEventListener("keydown",function(){
+        clearTimeout(n)
+     })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度新闻新榜</title>
+    <style>
+        body,h3,ul{
+            margin: 0;
+            padding: 0;
+        }
+        .news{
+            width: 360px;
+            /* height: 400px; */
+            background-color: red;
+            margin: 50px auto 0;
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        .news h3{
+            border: 1px solid red;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .news ul{
+            /* border: 1px solid #000; */
+            list-style: none;
+        }
+        .news ul li{
+            border-bottom: 1px dotted #ddd;
+            height: 35px;/*行高等于高度是相当于垂直居中*/
+            line-height: 35px;
+            font-size: 16px;
+            color: #333;
+        }
+        .news ul li a{
+            color: #333;
+            text-decoration: none;
+        }
+        .news  ul li a:hover{
+            color: red;
+        }
+        .news ul li a span{
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .col1{
+            color: red;
+        }
+        .col2{
+            color: rgb(244, 97, 97);
+        }
+        .col3{
+            color: #ffa552;
+        }
+    </style>
+</head>
+<body>
+    <div class="news">
+        <h3>百度新闻热榜</h3>
+        <ul>
+            <li> <a href=""> <span class="col1">1.</span>头条新闻巴拉巴拉</a></li>
+            <li> <a href=""> <span class="col2">2.</span>习近平向巴拿马当选总统穆利诺致贺电</a></li>
+            <li> <a href=""> <span class="col3">3.</span>习近平访问匈牙利的精彩瞬间</a></li>
+            <li><a href=""> <span>4.</span>习近平欧洲之行，几个场景很不寻常</a></li>
+            <li><a href=""> <span>5.</span>凡人微光 </a></li>
+            <li><a href=""> <span>6.</span>妈妈制造</a></li>
+        </ul>
+    </div>
+</body>
+</html>

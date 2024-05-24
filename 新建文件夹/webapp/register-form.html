@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入学登记form练习</title>
+    <style>
+             .search{
+            width: 400px;
+            height: 45px;
+            background-image: url(搜索.png);    /*搜索框背景图片*/
+            background-repeat: no-repeat;        /*设置背景图片不平铺*/
+            border-radius: 30px 0px 0px 30px;  
+            padding-left: 50px;
+            background-position: 10px 10px;       /*设置背景图片的位置*/
+            color:darkgray;
+            font-size: 18px; 
+            border: none;                   /*去除边框*/ 
+        }
+        /* 搜索框获得焦点时样式 */
+        .search:focus{
+            outline: coral solid 1px;    /*添加外边框*/
+        }
+        /* 搜索按钮样式 */
+        .btnsearch{
+            width: 90px;
+            height: 47px;
+            border: none;
+            background-color: coral;
+            color: #fff;
+            border-radius: 0px 20px 20px 0px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        /* 按钮悬浮时样式 */
+        .btnsearch:hover{
+            background-color: #ff5900;
+        }
+    </style>
+</head>
+<body>
+    <form action="../新建文件夹/test.html" method="post">
+        入学登记<br>
+        <label for="yourname">姓名为：</label>
+        <input type="text" id="yourname" placeholder="你的姓名"> <br>
+        性别为：
+        <label><input type="radio" name="sex" checked> 男</label>
+        <label><input type="radio" name="sex"> 女 </label><br>
+        高考成绩区间为：
+        <select name="grade" id="grade">
+            <option value="">550-560</option>
+            <option value="">560-570</option>
+            <option value="">570-580</option>
+            <option value="" selected>580-590</option>
+        </select> <br>
+        <input type="text" class="search" placeholder="搜索"> 
+        <button class="btsearch">搜索</button><br>
+        <hr>
+        做个介绍吧：
+        <textarea name="homeed" id="" cols="5" rows="5" style="display: flex;"> 简洁</textarea>
+        生日为：
+        <input type="date" required value="生日"><br>
+        籍贯为：
+        <input list="province">
+         <datalist id="province">
+            <option selected >哈尔滨</option>
+            <option>辽宁</option>
+         </datalist><br>
+         <input type="submit">提交 <br>
+         <input type="reset">重置<br>
+    </form>
+</body>
+</html>
