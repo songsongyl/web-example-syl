@@ -24,12 +24,14 @@
         const tea =document.getElementById("teacher")
         cou.addEventListener("change",function(){
            const result = courses.find((course) => course.id == cou.value) 
+        //    tea.innerHTML = result? `你的老师是: ${result.teachername}`:'无授课老师'
            if(result) {
             tea.innerHTML=`你的老师是: ${result.teachername}`
            }
            else{
-            tea.innerHTML = "无"
+            tea.innerHTML = "无授课老师"
            }
+        //    result && (tea == result.coursename)
         })
     </script>
 </body>
