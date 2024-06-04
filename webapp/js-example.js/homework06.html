@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手风琴</title>
+    <style>
+        ul li{
+            list-style: none;
+        }
+        p{
+            display: none;
+            background-color: pink;
+        }
+        h3 {
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>
+                <h3>菜单</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores velit fugit eligendi officiis libero, distinctio optio labore minima atque iste!
+                </p>
+            </li>
+            <li>
+                <h3>菜单</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores velit fugit eligendi officiis libero, distinctio optio labore minima atque iste!</p>
+            </li>
+            <li>
+                <h3>菜单</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores velit fugit eligendi officiis libero, distinctio optio labore minima atque iste!
+                </p>
+            </li>
+            <li>
+                <h3>菜单</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores velit fugit eligendi officiis libero, distinctio optio labore minima atque iste!
+                </p>
+            </li>
+            <li>
+                <h3>菜单</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores velit fugit eligendi officiis libero, distinctio optio labore minima atque iste!
+                </p>
+            </li>
+        </ul>
+    </div>
+    <script src="../jQuery.js/jQuery.js"></script>
+    <script>
+    $(function(){
+        $("h3").click(function(){
+            $(this).next().show(200).parent().siblings().children("p").hide(200)
+        })
+    })
+    </script>
+</body>
+</html>

@@ -6,6 +6,24 @@
     <title>数字千分位加逗号返回</title>
 </head>
 <body>
-    
+    <div>
+        <input type="text" id = "inp">
+        <button onclick="qianF()">点击让数字千分位加逗号返回</button>
+    </div>
+    <a href="https://blog.csdn.net/qq_34402069/article/details/124758417" hidden>相关知识</a>
+    <script >
+       
+       function qianF(){
+        let inn = document.getElementById("inp").value.toString().split('')
+    //    console.log(inn)
+        if(inn.length>3){
+            for(let i =3;i<inn.length;i+=4){
+                if(inn[i]!=",")
+                inn.splice(i,0,',')
+            }
+        }
+        document.getElementById("inp").value = inn.join('')
+       }
+    </script>
 </body>
 </html>
