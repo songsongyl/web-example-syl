@@ -5,11 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>模拟选课</title>
     <script src="../jQuery/jQuery.js"></script>
+    <style>
+		#da{
+			width:242px;
+			height:20px;
+			}
+		#div1{
+			width:100px;
+			height:20px;
+			border:1px solid;
+			}
+		#div2{
+			width:46px;
+			height:20px;
+			border:1px solid;
+			float:right;
+			margin-top:-22px;
+			margin-right:90px;
+			}
+		#div3{
+			width:100px;
+			height:20px;
+			border:1px solid;
+			float:right;
+			margin-top:-22px;
+			margin-right:-14px;
+			}
+		#da1{
+			width:242px;
+			height:200px;
+			}
+		#div4{
+			width:100px;
+			height:208px;
+			border:1px solid;
+			float:left;
+			margin-top:2px;
+			}
+		#zuo{
+			width:100px;
+			height:208px;
+			}
+		#you{
+			width:100px;
+			height:208px;
+		}
+		#div5{
+			width:46px;
+			height:208px;
+			border:1px solid;
+			float:right;
+			margin-top:2px;
+			margin-right:90px;
+			}
+		#div5 button{
+			width:48px;
+			background-color:pink;
+			}
+		#div6{
+			width:100px;
+			height:208px;
+			border:1px solid;
+			float:right;
+			margin-right:-14px;
+			margin-top:-210px;
+			}
+		#cao{
+			width:70px;
+			height:25px;
+			background-color:pink;
+			float:left;
+			
+			}
+	</style>
 </head>
 <body>
-    
-    <script>
+<h1>系统选课</h1>
+	<div id="da">
+		<div id="div1">
+		可选课程
+		</div>
+		<div id="div2">	
+		</div>
+		<div id="div3">
+		已选课程
+		</div>
+	</div>
+	<div id="da1">
+		<div id="div4">	
+		<select id="zuo" size="10">
+			<option>大学物理</option>
+			<option>高等数学</option>
+			<option>计算机基础</option>
+			<option>有机化学</option>
+			<option>毛概</option>
+			<option>语文</option>
+			<option>英语</option>			
+			<option>历史学</option>
+			<option>地理学</option>
+			<option>生物科技</option>
+			<option>土木工程</option>
+			<option>建筑学</option>
+			<option>工商管理学</option>
+		</select>
+		</div>
+		<div id="div5">
+			<button>选择</button><br>
+			<button>全选</button><br>
+			<button>退选</button><br>
+			<button>全退</button><br>
+			<button>上移</button><br>
+			<button>下移</button><br>
+			<button>置顶</button><br>
+			<button>置底</button>
+		</div>
+		<div id="div6">
+			<select id="you" size="10">
+				
+			</select>
+		</div>
+	</div>
+	<button id="tj">提交</button>
+<script>
+		$("#div5>button:eq(0)").click(function(){
+			$("#you").prepend($("#zuo>option:checked"))
+		})
 
+		$("#div5>button:eq(1)").click(function(){
+			$("#you").prepend($("#zuo>option"))
+		})
+
+		$("#div5>button:eq(2)").click(function(){
+			$("#zuo").prepend($("#you>option:checked"))
+		})
+
+		$("#div5>button:eq(3)").click(function(){
+			$("#zuo").prepend($("#you>option"))
+		})
+		//找到选中元素的上一个  然后将元素插入到它的前面 
+		$("#div5>button:eq(4)").click(function(){
+			$("#zuo>option:checked").prev().before($("#zuo>option:checked"))
+		})
+
+
+		$("#div5>button:eq(5)").click(function(){
+			$("#zuo>option:checked").next().after($("#zuo>option:checked"))
+		})
+
+		$("#div5>button:eq(6)").click(function(){
+			$("#zuo>option:first").before($("#zuo>option:checked"))
+		})
+
+		$("#div5>button:eq(7)").click(function(){
+			$("#zuo>option:last").after($("#zuo>option:checked"))
+		})
     </script>
 </body>
 </html>
