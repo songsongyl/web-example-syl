@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除对象数组中相同元素</title>
+</head>
+<body>
+    <script>
+        const arr = []
+        const objs = [{ id: 9 }, { id: 8 }, { id: 7 }, { id: 7 }, { id: 7 }, { id: 6 }]
+        for(let i =1;i<objs.length;i++){
+            if(this.indexOf(this[i])==i){
+                arr.push(this[i])
+            }
+        }
+        /*
+        方法2
+        ...new Set(objs)
+        
+        方法3：
+         array.filter((item, index) => {  
+        return array.indexOf(item) === index;  
+    });  
+       方法4：
+        for (let i = 0; i < array.length; i++) {  
+        for (let j = i + 1; j < array.length; j++) {  
+            if (array[i] === array[j]) {  
+                array.splice(j, 1);  
+                j--;  
+            }  
+        }  
+    }  
+*/
+    </script>
+</body>
+</html>

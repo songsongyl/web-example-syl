@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟真实选课</title>
+    <script src="../jQuery/jQuery.js"></script>
+</head>
+<body>
+    <h2>课程列表</h2>
+<ul id="course-list">
+  <li>
+    <input type="checkbox" class="course" data-name="数学" data-time="0606-800-1000">
+    <label>数学 - 周一 8:00-10:00</label>
+  </li>
+  <li>
+    <input type="checkbox" class="course" data-name="语文" data-time="0606-900-1100">
+    <label>语文 - 周一 9:00-11:00</label>
+  </li>
+  <li>
+    <input type="checkbox" class="course" data-name="英语" data-time="0605- 1010-1200">
+    <label>英语 - 周三 10:10-12:00</label>
+  </li>
+</ul>
+
+<script>
+$(document).ready(function() {
+  $('.course').change(function() {
+    var selectedCourse = $(this);
+    var selectedTime = selectedCourse.data('time');
+    $('.course').not(selectedCourse).each(function() {
+      if ($(this).is(':checked')) {
+        var currentTime = $(this).data('time');
+        if (isTimeConflict(selectedTime, currentTime)) {
+          alert('选择的课程与已选课程存在时间冲突！');
+          selectedCourse.prop('checked', false);
+        }
+      }
+
+    });
+  });
+
+  function isTimeConflict(time1, time2) {
+  var [day1, start1, end1] = time1.split('-');
+  var [day2, start2, end2] = time2.split('-');
+
+  // 判断时间冲突的逻辑
+  if (day1 === day2) {
+    var startTime1 = new Date(`${start1}`);
+    var endTime1 = new Date(`${end1}`);
+    var startTime2 = new Date(`${start2}`);
+    var endTime2 = new Date(`${end2}`);
+    console.log(startTime1,endTime1);
+    if ((startTime1 < endTime2 && endTime1 > startTime2) ||
+        (startTime2 < endTime1 && endTime2 > startTime1)) {
+      return true; // 存在时间冲突
+    }
+  }
+
+  return false; // 不存在时间冲突
+}
+});
+
+    </script>
+</body>
+</html>
