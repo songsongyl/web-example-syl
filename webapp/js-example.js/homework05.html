@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>监听按钮数量</title>
+    <script src="../jQuery/jQuery.js"></script>
 </head>
 <body>
     <div>
-        <input type="checkbox" >
-        <input type="checkbox" >
-        <input type="checkbox" >
-        <input type="checkbox" >
+        <input type="checkbox" onclick="x.test()">
+        <input type="checkbox" onclick="x.test()">
+        <input type="checkbox" onclick="x.test()">
+        <input type="checkbox" onclick="x.test()">
     </div>
-    <script src="../jQuery.js/jQuery.js"></script>
+   
     <script>
-      const num =2
+      const instrictF = ()=>{
+      function test(){
+        const num =2
       $("input").css("width",50).css("height",50)
       const checkbox = $("input")
-      checkbox.click(function(){
         let checked = checkbox.filter(":checked")
         let unchecked = checkbox.not(":checked")
         valid = checked.length >=num
         unchecked.prop("disabled",valid)
-      })
+      }
+      
+      return {test}
+      }
+      const x = instrictF()
     </script>
 </body>
 </html>
