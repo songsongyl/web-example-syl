@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>避免禁选授课时间冲突</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        table,
+    table td,
+    table th {
+        border-collapse: collapse;
+    }
+    
+        table {
+            width: 400px;
+            text-align: center;
+            
+        }
+    
+    table thead {
+        background-color: green;
+    }
+    
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+           <tr>
+                <th>#</th>
+                <th>名称</th>
+                <th>学分</th>
+                <th>起止周</th>
+                <th>时间</th>
+                <th>教师</th>
+                <th>操作</th>
+           </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="index">1</td>
+                <td>数据库原理</td>
+                <td>3</td>
+                <td class="week">1 - 10</td>
+                <td class="day">周1/12节</td>
+                <td>谭文韬</td>
+                <td><input type="checkbox" name="items"></td>
+            </tr>
+            <tr>
+                <td class="index">2</td>
+                <td>Web开发技术</td>
+                <td>2.5</td>
+                <td class="week">1 - 8</td>
+                <td class="day">周1/34节</td>
+                <td>徐懿</td>
+                <td><input type="checkbox" name="items"></td>
+            </tr>
+            <tr>
+                <td class="index">3</td>
+                <td>托福阅读</td>
+                <td>2</td>
+                <td class="week">1 - 5</td>
+                <td class="day">周1/12节</td>
+                <td>李景阳</td>
+                <td><input type="checkbox" name="items"></td>
+                </tr>
+            <tr>
+                <td class="index">4</td>
+                <td>高级英语视听</td>
+                <td>2</td>
+                <td class="week">3 - 10</td>
+                <td class="day">周1/34节</td>
+                <td>龙超悦</td>
+                <td><input type="checkbox" name="items"></td>
+                </tr>
+            <tr>
+                <td class="index">5</td>
+                <td>Web系统框架</td>
+                <td>2.5</td>
+                <td class="week">10 - 17</td>
+                <td class="day">周1/12节</td>
+                <td>王子阳</td>
+                <td><input type="checkbox" name="items"></td>
+                </tr>
+    <p></p>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                
+<script>
+    $(document).ready(
+        () => {
+            let clickboxs = $("input[name=items]");
+            function beginWeek(clickbox){
+                        return $(clickbox).parent().siblings(".week").text().split(' - ')[0];
+                    }
+                    function endWeek(clickbox){
+                        return $(clickbox).parent().siblings(".week").text().split(' - ')[1];
+                    }
+                    
+                    function day(clickbox){
+                        return $(clickbox).parent().siblings(".day").text()[1];
+                    }
+                    function firstClass(clickbox){
+                        return $(clickbox).parent().siblings(".day").text()[3];
+                    }
+                    function secondClass(clickbox){
+                        return $(clickbox).parent().siblings(".day").text()[4];
+                    }
+                    //创建一维数组
+                    let clashes = [];
+                    //在一维数组的基础上创建二维数组
+                    for(let i=1;i<=clickboxs.length;i++)
+                    clashes[i]=[];
+
+            clickboxs.each(function(){
+                let begin = beginWeek(this);
+                    let end = endWeek(this);
+                    //得到每一个课程的上课时间（第几天上课）和上课节数
+                    let theday = day(this);
+                    let first = firstClass(this);
+                    let second = secondClass(this);
+                    let index = $(this).parent().siblings(".index").text();
+                    let nowIndex = 0;
+                    //console.log("**************");
+                    clickboxs.not(this).each(
+                        
+                        function (){
+                            //console.log("==========================");
+                           // console.log(begin+" "+end+" "+theday+" "+first+" "+second);
+                            // console.log(beginWeek(this)+" "+endWeek(this)+" "+day(this)+" "+firstClass(this)+" "+secondClass(this))
+                            
+                        if(
+                            //为什么判断周的时候用下面的语句会导致错误。
+                            //((beginWeek(this)>=begin&&beginWeek(this)<=end)||(endWeek(this)>=begin&&endWeek(this)<=end))
+                            begin<=endWeek(this)&&end>=beginWeek(this)   
+                            &&(day(this)==theday)
+                                 &&(firstClass(this)==first)
+
+                        )
+                        //if(begin<=endWeek(this)&&end>=beginWeek(this)&&day(this)===theday&&firstClass(this)===first)
+                        clashes[index][nowIndex++]=this;
+                        /*
+                        else
+                        {
+                            
+                            console.log(`(${beginWeek(this)}>=${begin}&&${beginWeek(this)}<=${end})||(${endWeek(this)}>=${begin}&&${endWeek(this)}<=${end})`);
+                            //console.log(beginWeek(this),begin,beginWeek(this),end+" "+firstClass(this)+" "+secondClass(this))
+                            if((beginWeek(this)>=begin&&beginWeek(this)<=end)||(endWeek(this)>=begin&&endWeek(this)<=end))
+
+                            //if(begin<=endWeek(this)&&end>=beginWeek(this))
+                            {console.log("false");}
+                        else {
+                            console.log("true");
+                            console.log(begin+""+endWeek(this)+""+end);
+                        }
+                            if((day(this)==theday))
+                            console.log("false");
+                            else console.log("true");
+                            if((firstClass(this)==first))
+                            console.log("false");
+                            else console.log("true");
+                        }
+                        */
+                         
+                                }
+                                
+                                )
+                    
+                    
+                }
+                
+                )
+                //for(let i=1;i<=clashes.length;i++)
+               // console.log(clashes[i]);
+
+            clickboxs.click(
+                function() {
+                    
+                    //初始化
+                    for(let i=0;i<clickboxs.length;i++){
+                        $(clickboxs[i]).prop("disabled",false);
+                    }
+                    //如果选中，则和选中冲突的全都不可选择
+                    let len = clickboxs.filter(":checked").length;
+                    //console.log(len);
+                    for(let i=1;i<=len;i++){
+                        let index = $(clickboxs.filter(":checked")[i-1]).parent().siblings(".index").text();
+                        $(clashes[index]).each(
+                            function(){
+                                $(this).prop("disabled",true);
+                            }
+                        )
+
+                    }
+                    
+
+
+                }
+            );
+        }
+    );
+</script>
+        </tbody>
+    </table>
+</body>
+</html>
