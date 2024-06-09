@@ -22,8 +22,13 @@ console.time("Test code")
         //         arr.push(objs[i])
         //     }
         // }
-        let arr2=Array.from(new Set(objs.map(JSON.stringify))).map(JSON.parse)
+        // let arr2=Array.from(new Set(objs))
         
+  function unique(arr, type) {
+    const res = new Map();
+    return arr.filter((a) => !res.has(a[type]) && res.set(a[type], 1));
+  }
+  let result = unique(objs,"id")
         }
         console.timeEnd("Test code")
         /*

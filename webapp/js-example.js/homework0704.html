@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>选课有问题版</title>
+    <title>Document</title>
     <script
     src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
@@ -111,8 +111,7 @@ const courses = [
             teacherName: '龙超悦'
         }
     ]
-        
-        $(function(){
+    $(function(){
             courses.forEach(course=>{
                 const row = document.createElement('tr')
              row.innerHTML=`<td>${course.id}</td>
@@ -127,7 +126,6 @@ const courses = [
             </td>`
             $("tbody").append(row)
             })
-            let selected = []
             function hasConflict(course1,course2){
                 // console.log(course2);
                 if((course1.startWeek<=course2.endWeek)&&(course1.endWeek>=course2.startWeek)){
@@ -139,51 +137,38 @@ const courses = [
                 }
                 return false
             }
-            function isSelected(courseId) {
-                return selected.find((c) => c.id == courseId)
+            let conflict ={}
+            for(let i =0 ;i<courses.length;i++){
+             let conflict1 = []
+                const course = courses[i]
+                for(let j=0;j<courses.length;j++){
+                    if(i!=j &&hasConflict(course,courses[j])){
+                        conflict1.push(courses[j].id)
+                    } 
+                }
+                conflict[course.id]=conflict1
             }
-            
-        
+           
+            console.log(conflict)
             $("input").on("click",function(){
-                let courseId =parseInt( $(this).val())
-                console.log(courseId);
-                const course = courses.find((c) => c.id === courseId)
-                let flag=0
-        if (isSelected(courseId)) {
-          // 如果已选择该课程，则从已选课程列表中移除
-          const index = selected.findIndex((c) => c.id === courseId)
-          selected.splice(index, 1)
-           $("label").text("选课")
-           $(this).prop("disabled",f)
-          alert('退课成功！')
-        } else {
-          // 检查课程是否与已选课程时间冲突
-          for (const selectedCourse of selected) {
-            if (hasConflict(selectedCourse, course)) {
-                flag=1
-              alert('该课程与已选课程时间冲突！')
-              $(this).prop("disabled",true)
-              return
-            }
-          }
-          if(flag==0){
-            // 如果没有时间冲突，则将课程添加到已选课程列表中
-          selected.push(course)
-        //   console.log($(this).parent("label").text())
-           $(this).parent().children("label").text("退课")
-          alert('选课成功！')
-        }
-
-          }
-          
-
+                let id = $(this).val()
+                let arr = conflict[id]
+                for(let i=0;i<arr.length;i++){
+                   $(`input[value=${arr[i]}]`)
+                   .prop("disabled",$(this).prop("checked"))
+                    
+                }
+                if($(this).is(":checked")){
+                    $(this).parent().children("label").text("退课")
+                }else{
+                    $(this).parent().children("label").text("选课")
+                }
+                
+                
             })
-        
-        
-        
-        
+
         })
-        
+
     </script>
 </body>
 </html>
