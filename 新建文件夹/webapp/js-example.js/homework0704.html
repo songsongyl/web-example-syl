@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        table{
+           border-collapse: collapse;
+           border: 1px solid gray;
+           padding: 5px;
+           width: 100%;
+           background-color: bisque;
+        }
+        th {
+            padding: 5px;
+        }
+        tbody {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                   
+                    <th>课程号</th>
+                    <th>课程名称</th>
+                    <th>课程学分</th>
+                    <th>课程时期</th>
+                    <th>课程周次</th>
+                    <th>课程时间</th>
+                    <th>教师名称</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+// 模拟课程数据
+const courses = [
+        {
+            id: 100,
+            name: '数据库原理',
+            point: 3.0,
+            startWeek: 1,
+            endWeek: 10,
+            dayOfWeek: 1,
+            period: 12,
+            teacherName: '谭文韬'
+        },
+        {
+            id: 101,
+            name: '影视赏析',
+            point: 1.5,
+            startWeek: 1,
+            endWeek: 8,
+            dayOfWeek: 1,
+            period: 12,
+            teacherName: '李春泰'
+        },
+        {
+            id: 102,
+            name: 'Web系统框架',
+            point: 2.5,
+            startWeek: 11,
+            endWeek: 17,
+            dayOfWeek: 1,
+            period: 12,
+            teacherName: '王子阳'
+        },
+        {
+            id: 103,
+            name: '托福阅读',
+            point: 2.0,
+            startWeek: 5,
+            endWeek: 15,
+            dayOfWeek: 1,
+            period: 12,
+            teacherName: '李景阳'
+        },
+        {
+            id: 104,
+            name: 'Web开发技术',
+            point: 2.5,
+            startWeek: 1,
+            endWeek: 8,
+            dayOfWeek: 1,
+            period: 34,
+            teacherName: '徐懿'
+        },
+        {
+            id: 105,
+            name: '高级英语视听',
+            point: 2.0,
+            startWeek: 3,
+            endWeek: 10,
+            dayOfWeek: 1,
+            period: 34,
+            teacherName: '龙超悦'
+        }
+    ]
+    $(function(){
+            courses.forEach(course=>{
+                const row = document.createElement('tr')
+             row.innerHTML=`<td>${course.id}</td>
+             <td>${course.name}</td>
+             <td>${course.point}</td>
+             <td>${'第'+ course.startWeek +'-' + course.endWeek + '周'}</td>
+             <td>${'周' + course.dayOfWeek}</td><td>${course.period + '节'}</td>
+             <td>${course.teacherName}</td>
+             <td>
+            <label for="in"> 选课</label>
+            <input id = "in" type = "checkbox" value="${course.id}">
+            </td>`
+            $("tbody").append(row)
+            })
+            function hasConflict(course1,course2){
+                // console.log(course2);
+                if((course1.startWeek<=course2.endWeek)&&(course1.endWeek>=course2.startWeek)){
+                    if(course1.dayOfWeek===course2.dayOfWeek){
+                        if(course1.period===course2.period){
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+            let conflict ={}
+            for(let i =0 ;i<courses.length;i++){
+             let conflict1 = []
+                const course = courses[i]
+                for(let j=0;j<courses.length;j++){
+                    if(i!=j &&hasConflict(course,courses[j])){
+                        conflict1.push(courses[j].id)
+                    } 
+                }
+                conflict[course.id]=conflict1
+            }
+           
+            console.log(conflict)
+            $("input").on("click",function(){
+                let id = $(this).val()
+                let arr = conflict[id]
+                for(let i=0;i<arr.length;i++){
+                   $(`input[value=${arr[i]}]`)
+                   .prop("disabled",$(this).prop("checked"))
+                    
+                }
+                if($(this).is(":checked")){
+                    $(this).parent().children("label").text("退课")
+                }else{
+                    $(this).parent().children("label").text("选课")
+                }
+                
+                
+            })
+
+        })
+
+    </script>
+</body>
+</html>

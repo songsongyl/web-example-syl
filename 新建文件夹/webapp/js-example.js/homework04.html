@@ -7,16 +7,34 @@
 </head>
 <body>
     <script>
+        
+console.time("Test code")
         const arr = []
-        const objs = [{ id: 9 }, { id: 8 }, { id: 7 }, { id: 7 }, { id: 7 }, { id: 6 }]
-        for(let i =1;i<objs.length;i++){
-            if(this.indexOf(this[i])==i){
-                arr.push(this[i])
-            }
+        const objs = []
+      for (let i = 0; i < 300; i++) {
+        objs.push({ id: Math.floor(Math.random() * 1_000) })
+      }
+
+        // const objs = [{ id: 9 }, { id: 8 }, { id: 7 }, { id: 7 }, { id: 7 }, { id: 6 }]
+        for(let i=1 ;i<=30;i++){
+        //     for(let i =1;i<objs.length;i++){
+        //     if(objs.indexOf(objs[i])==i){
+        //         arr.push(objs[i])
+        //     }
+        // }
+        // let arr2=Array.from(new Set(objs))
+        
+  function unique(arr, type) {
+    const res = new Map();
+    return arr.filter((a) => !res.has(a[type]) && res.set(a[type], 1));
+  }
+  let result = unique(objs,"id")
         }
+        console.timeEnd("Test code")
         /*
         方法2
         ...new Set(objs)
+        let arr2=Array.from(new Set(objs.map(JSON.stringify))).map(JSON.parse)
         
         方法3：
          array.filter((item, index) => {  

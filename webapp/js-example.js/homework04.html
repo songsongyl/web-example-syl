@@ -50,6 +50,230 @@ console.time("Test code")
         }  
     }  
 */
+
+/*
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //基于判断属性,filter过滤
+    function removeDuplicatesByProperty(arr, propName) {
+    // 创建一个空对象，用于存储已经出现过的属性值
+    const seen = {};
+    // 使用filter()方法过滤数组，只保留第一次出现的属性值对应的对象
+    return arr.filter(item => {
+        // 获取当前对象的属性值
+        const propVal = item[propName];
+        // 如果该属性值在之前已经出现过，则返回false，否则将该属性值添加到seen对象中并返回true
+        return seen.hasOwnProperty(propVal) ? 0 : (seen[propVal] = 1);
+    });
+    }
+    //基于判断属性,for循环 40.51ms
+    function removeDuplicatesByProperty1(arr, propName) {
+    const seen = {};
+    const uniqueArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        const item = arr[i];
+        const propVal = item[propName];
+
+        if (!seen.hasOwnProperty(propVal)) {
+            seen[propVal] = 1;
+            uniqueArr.push(item);
+        }
+    }
+    return uniqueArr;
+}
+//基于判断属性,for-of循环 81.69ms
+function removeDuplicatesByProperty2(arr, propName) {
+    const seen = {};
+    const uniqueArr = [];
+
+    for (const item of arr) {
+        const propVal = item[propName];
+
+        if (!seen.hasOwnProperty(propVal)) {
+            seen[propVal] = 1;
+            uniqueArr.push(item);
+        }
+    }
+    
+    return uniqueArr;
+}
+//基于判断属性,for-Each循环
+function removeDuplicatesByProperty3(arr, propName) {
+    const seen = {};
+    const uniqueArr = [];
+
+    arr.forEach(item => {
+        const propVal = item[propName];
+
+        if (!seen.hasOwnProperty(propVal)) {
+            seen[propVal] = 1;
+            uniqueArr.push(item);
+        }
+    });
+
+    return uniqueArr;
+}
+//基于判断属性,for-in循环
+function removeDuplicatesByProperty4(arr, propName) {
+    const seen = {};
+    const uniqueArr = [];
+
+    for (const index in arr) {
+        const item = arr[index];
+        const propVal = item[propName];
+
+        if (!seen.hasOwnProperty(propVal)) {
+            seen[propVal] = 1;
+            uniqueArr.push(item);
+        }
+    }
+
+    return uniqueArr;
+}
+//基于数组
+    function remove1(arr, propName) {
+        let uniquearr = [];
+        for(let i =0; i < arr.length; i++) {
+            let obj = arr[i];
+            let isDuplicate = 0;
+            for(let j = 0; j < uniquearr.length; j++) {
+                if(obj[propName] === uniquearr[j][propName]) {
+                  isDuplicate = 1;
+                  break;  
+                }
+            }
+            if (isDuplicate == 0) {
+            uniquearr.push(obj);
+        }
+        }
+        return uniquearr
+    }
+//基于set集合
+    function remove2(arr, propertyName) {
+    let uniqueValues = new Set();
+    for (let obj of arr) {
+        uniqueValues.add(obj[propertyName]);
+    }
+    let uniqueObjs = [];
+    for (let value of uniqueValues) {
+        for (let obj of arr) {
+            if (obj[propertyName] === value) {
+                uniqueObjs.push(obj);
+                break;
+            }
+        }
+    }
+    return uniqueObjs;
+}
+    //const objs = [{id: 8}, { id: 9 }, { id: 8 }, { id: 7 }, { id: 7 }, { id: 7 }, { id: 6 }];
+    const objs = [];
+      for (let i = 0; i < 8000000; i++) {
+        objs.push({ id: Math.floor(Math.random() * 1_000) })
+      }
+    //const uniqueObjs1 = removeDuplicatesByProperty4(objs, 'id');
+    //console.log(uniqueObjs1);
+    /*const uniqueObjs2 = remove1(objs, "id");
+    console.log(uniqueObjs2);
+    const uniqueObjs3 = remove2(objs, "id");
+    console.log(uniqueObjs3);*/
+    //测试效率
+      //基于判断属性值的filter()方法 91.39ms
+      let Time1 = [];
+    let sumTime1 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs1 = removeDuplicatesByProperty(objs, 'id');
+    let endTime = performance.now();
+    Time1[i] = endTime - startTime; 
+    sumTime1 +=Time1[i]; 
+    }
+    const aveTime1 = sumTime1 / 30;
+    console.log(aveTime1);
+    //基于判断属性值的for循环方法 40.51ms
+    let Time2 = [];
+    let sumTime2 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs2 = removeDuplicatesByProperty1(objs, 'id');
+    let endTime = performance.now();
+    Time2[i] = endTime - startTime; 
+    sumTime2 +=Time2[i]; 
+    }
+    const aveTime2 = sumTime2 / 30;
+    console.log(aveTime2);
+    //基于判断属性值的for-of循环方法 81.69ms
+    let Time3 = [];
+    let sumTime3 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs3 = removeDuplicatesByProperty2(objs, "id");
+    let endTime = performance.now();
+    Time3[i] = endTime - startTime; 
+    sumTime3 +=Time3[i]; 
+    }
+    const aveTime3 = sumTime3 / 30;
+    console.log(aveTime3);
+    //基于判断属性值的forEach方法 83.30ms
+    let Time4 = [];
+    let sumTime4 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs4 = removeDuplicatesByProperty3(objs, "id");
+    let endTime = performance.now();
+    Time4[i] = endTime - startTime; 
+    sumTime4 +=Time4[i]; 
+    }
+    const aveTime4 = sumTime4 / 30;
+    console.log(aveTime4);
+    //基于判断属性值的for-in循环方法 1248.42ms
+    /*let Time5 = [];
+    let sumTime5 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs5 = removeDuplicatesByProperty4(objs, "id");
+    let endTime = performance.now();
+    Time5[i] = endTime - startTime; 
+    sumTime5 +=Time5[i]; 
+    }
+    const aveTime5 = sumTime5 / 30;
+    console.log(aveTime5);
+    //基于数组 3532.13ms
+    let Time6 = [];
+    let sumTime6 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs6 = remove1(objs, "id");
+    let endTime = performance.now();
+    Time6[i] = endTime - startTime; 
+    sumTime6 +=Time6[i]; 
+    }
+    const aveTime6 = sumTime6 / 30;
+    console.log(aveTime6);*/
+    //基于set集合 204.84ms
+    let Time7 = [];
+    let sumTime7 = 0;
+    for(let i=0; i<30;i++) {   
+    let startTime = performance.now();
+    const uniqueObjs7 = remove2(objs, "id");
+    let endTime = performance.now();
+    Time7[i] = endTime - startTime; 
+    sumTime7 +=Time7[i]; 
+    }
+    const aveTime7 = sumTime7 / 30;
+    console.log(aveTime7);
+</script>
+</body>
+</html>
+*/
     </script>
 </body>
 </html>

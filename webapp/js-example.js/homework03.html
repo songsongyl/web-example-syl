@@ -18,7 +18,8 @@
     <script >
        
        function qianF(){
-        let inn =$("#inp").val().split("")
+        if(!isNaN($("#inp").val())){
+            let inn =$("#inp").val().split("")
        
         if(inn[0]=="-"){
               inn.splice(0,1)
@@ -70,7 +71,11 @@
            
          
       $("#res").text(lat) 
+    }else{
+        $("#res").text("非法数字")
     }
+        }
+        
     </script>
 </body>
 </html>
