@@ -64,6 +64,7 @@
     $(function () {
         // 初始化并添加数据
         courses.forEach((c, index) => {
+            //实现动态添加
             const h = `
                     <div class="table-row">
                         <div class="table-cell">${index + 1}</div>
@@ -82,13 +83,11 @@
 
         // 获取全部数据input组件
         const courseNodes = $("input[data-courseid]");
-        // 缓存课程对应的冲突组件数组，避免反复查询
+        //用map 缓存课程对应的冲突组件数组，避免反复查询
         const confMap = new Map();
-
         courseNodes.click(function () {
                 const courseId = $(this).data("courseid");
                 let confNodes = confMap.get(courseId);
-
                 // 如果缓存中没有，则遍历比较，将jquery对象存入数组，将数组存入map
                 if (!confNodes) {
                     confNodes = [];
@@ -103,8 +102,8 @@
                             const confInput = $(`input[data-courseid=${c.id}]`);
                             // 获取checkbox父节点，的父节点。即所在行
                             const confRow = confInput.parent().parent();
-                            // 将input/row均存入
-                            const conflict = {confInput: confInput, confRow: confRow};
+                            // 将course/input/row均存入
+                            const conflict = {course:c,confInput: confInput, confRow: confRow};
                             confNodes.push(conflict);
                         })
 
@@ -113,10 +112,21 @@
                 }
                 // 判断选中/取消状态
                 const ch = $(this).prop("checked");
-                confNodes.forEach(c => {
-                    c.confInput.prop("disabled", ch);
-                    c.confRow.css("opacity", ch ? 0.2 : 1.0);
-                })
+                //计数器之前版本实现
+                // confNodes.forEach(c => {
+                //     c.confInput.prop("disabled", ch);
+                //     c.confRow.css("opacity", ch ? 0.2 : 1.0);
+                // })
+                for(const con of confNodes){
+                    const ccourse = con.course
+                //加了计数器进行判断
+                //属性不存在就赋值
+                    ccourse.confNum ??=0
+                    ch? ccourse.confNum++:ccourse.confNum--
+                    const dis =ccourse.confNum > 0
+                    con.confInput.prop("disabled",dis)
+                    con.confRow.css("opacity",dis ? 0.2:1.0)
+                }
             }
         )
     })
